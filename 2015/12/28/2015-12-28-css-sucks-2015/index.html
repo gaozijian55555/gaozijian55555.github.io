@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="ZJ Gao"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>都 2015 年了，CSS 怎么还是这么糟糕 - ZJ Gao'Blog</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><div class="post-header"><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">都 2015 年了，CSS 怎么还是这么糟糕</h1><ul class="meta"><li><i class="icon icon-author"></i>ZJ Gao</li><li><i class="icon icon-clock"></i>6 Minutes</li><li><i class="icon icon-calendar"></i>December 28, 2015</li></ul></div></div><div class="article-content" style="max-width:800px"><blockquote>
+<p>下滑这里查看更多内容</p>
+</blockquote>
+<h3 id="Watching-Fullscreen-→"><a href="#Watching-Fullscreen-→" class="headerlink" title="Watching Fullscreen →"></a><a href="https://huangxuan.me/css-sucks-2015/" target="_blank" rel="external">Watching Fullscreen →</a></h3><div class="visible-md visible-lg"><br><img src="//huangxuan.me/css-sucks-2015/attach/qrcode.png" width="350"><br><small class="img-hint">你也可以通过扫描二维码在手机上观看</small><br></div>
+
+
+<p>这个 Web Slides 开源在<a href="https://github.com/Huxpro/css-sucks-2015" target="_blank" rel="external">我的 Github 上</a>，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目</p>
+<h3 id="Catalog"><a href="#Catalog" class="headerlink" title="Catalog"></a>Catalog</h3><ul>
+<li>Document Times<ul>
+<li>Frameworks</li>
+<li>Style Guide<ul>
+<li><strong>OOCSS</strong></li>
+<li><strong>SMACSS</strong></li>
+</ul>
+</li>
+<li><strong>Pre-processer</strong></li>
+<li><strong>PostCSS</strong></li>
+</ul>
+</li>
+<li>Application Times<ul>
+<li><strong>Shadow DOM</strong></li>
+<li><strong>CSS “4”</strong></li>
+<li>Naming Convention<ul>
+<li><strong>BEM</strong></li>
+<li><strong>SUIT</strong></li>
+</ul>
+</li>
+<li><strong>Atomic CSS</strong></li>
+<li><strong>CSS in JS</strong></li>
+<li><strong>CSS Modules</strong>  <ul>
+<li>Interoperable CSS</li>
+</ul>
+</li>
+<li>PostCSS, again</li>
+</ul>
+</li>
+<li>My Opinionated Proposal<ul>
+<li><strong>POCss</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="POCss-Page-Override-Components-CSS"><a href="#POCss-Page-Override-Components-CSS" class="headerlink" title="POCss: Page Override Components CSS"></a>POCss: Page Override Components CSS</h2><h3 id="1-Scoping-Components-CSS-Blocks-should-only-be-used-inside-a-component-of-the-same-name"><a href="#1-Scoping-Components-CSS-Blocks-should-only-be-used-inside-a-component-of-the-same-name" class="headerlink" title="1. Scoping Components CSS Blocks should only be used inside a component of the same name."></a>1. Scoping Components <br><small style="line-height:2em;"><em>CSS Blocks should only be used inside a component of the same name.</em></small></h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Component/index.scss</span></div><div class="line"><span class="selector-class">.ComponentName</span> &#123;</div><div class="line">    &amp;--mofierName &#123;&#125;</div><div class="line">    &amp;__decendentName &#123;</div><div class="line">        &amp;--modifierName &#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-class">.isStateOfComponent</span> &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Component/index.js</span></div><div class="line"><span class="built_in">require</span>(<span class="string">'./index.scss'</span>);</div></pre></td></tr></table></figure>
+<p>CSS is <em>always bundled</em> with components<br>(from loading, mount to unmount)</p>
+<h3 id="2-Components-can-be-Overrode-by-Pages-There-is-always-requirements-to-rewrite-styles-of-components-in-pages"><a href="#2-Components-can-be-Overrode-by-Pages-There-is-always-requirements-to-rewrite-styles-of-components-in-pages" class="headerlink" title="2. Components can be Overrode by Pages There is always requirements to rewrite styles of components in pages"></a>2. Components can be Overrode by Pages <br><small style="line-height:2em;"><em>There is always requirements to rewrite styles of components in pages</em></small></h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Pages/PageA.scss</span></div><div class="line"><span class="selector-id">#PageA</span> &#123;</div><div class="line">    <span class="selector-class">.pagelet-name</span> &#123;</div><div class="line">        <span class="selector-class">.pagelet-descendent-name</span> &#123;&#125;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-class">.ComponentName</span>&#123; <span class="comment">/* override */</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Pages/index.js</span></div><div class="line"><span class="built_in">require</span>(<span class="string">'./PageA.scss'</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li><em>#Page</em> for absolutely scoping between pages</li>
+<li><em>.pagelet-name</em> should be lowercase to prevent conflicting with components</li>
+</ul>
+<h3 id="Why-POC"><a href="#Why-POC" class="headerlink" title="Why POC?"></a>Why POC?</h3><ul>
+<li><p><strong>It’s technology-agnostic</strong><br><small><br>  <em>One css framework can be played with whatever technology stacks</em><br><br>  <em>You can combined Scss, PostCSS and whatever you want</em><br></small></p>
+</li>
+<li><p><strong>Solving problems, and easy</strong><br><small><br>  <em>Makes reading and teamwork much easier</em><br><br>  <em>Get all benefit from BEM, SUITCSS and others</em><br></small></p>
+</li>
+<li><p><strong>Leverage the power of cascading properly</strong><br><small><br>  <em>Scoping components but allow reasonable overriding</em><br><br>  <em>It’s pragmatic, flexible and hitting the sweet spot</em><br></small></p>
+</li>
+</ul>
+<h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h3><p><a href="http://lab.hakim.se/reveal-js" target="_blank" rel="external">Reveal.js</a></p>
+</div><div class="article-meta" style="max-width:800px"><div class="tags"><i class="icon icon-tag"></i><ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a><span class="tag-list-count">12</span></li></ul></div></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cizz5zd8z000snk60g2j27g2m" data-title="都 2015 年了，CSS 怎么还是这么糟糕" data-url="http://yoursite.com/2015/12/28/2015-12-28-css-sucks-2015/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2016/02/01/2016-02-01-React-vs-Angular2/"><i class="icon icon-arror-left"></i></a></li><li><a href="/2015/12/15/2015-12-15-ios9-safari-web/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="http://github.com/gaozijian55555" title="GitHub" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="http://weibo.com/heqibang" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="http://wechat.com/gaozijian55555" title="WeChat" target="_blank"><i class="icon icon-wechat"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2017 ZJ Gao'Blog<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></body></html>
